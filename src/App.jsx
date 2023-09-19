@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './App.scss';
 import TodoInput  from './components/TodoInput/TodoInput';
 import TodoList from './components/TodoList/TodoList';
@@ -9,6 +9,18 @@ import TodoFooter from './components/TodoFooter/TodoFooter';
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTitle, setNewTitle] = useState('');
+
+  const countActiveTodos = useMemo(() => {
+    const count = todos.reduce((count, current) => {
+      if (!current.completed) {
+        return count + 1;
+      }
+
+      return count;
+    }, 0)
+
+    return count;
+  });
 
   useEffect(() => {
     const storedTodos = localStorage.getItem('todos');
@@ -68,7 +80,7 @@ function App() {
           onComplete={handleCompleteTodo}
         />
         <TodoFooter 
-
+          activeTodos={countActiveTodos}
         />
       </div>
     </div>

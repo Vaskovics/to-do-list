@@ -16,6 +16,7 @@ const TodoInput = ({
       />
 
       <button
+        className='todo-input__add-button'
         onClick={onAddTodo}
       >
         Add

@@ -20,7 +20,12 @@ const TodoList = ({
               'completed': todo.completed,
             })}
           >
-            <button onClick={() =>onRemove(todo.id)}>X</button>
+            <button
+              onClick={() =>onRemove(todo.id)}
+              className='todolist__button'
+            >
+              X
+            </button>
             
             <span 
               className={classNames(
