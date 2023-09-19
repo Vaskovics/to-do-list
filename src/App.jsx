@@ -9,6 +9,7 @@ import TodoFooter from './components/TodoFooter/TodoFooter';
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTitle, setNewTitle] = useState('');
+  const [filterBy, setFiletBy] = useState();
 
   const countActiveTodos = useMemo(() => {
     const count = todos.reduce((count, current) => {
@@ -54,14 +55,46 @@ function App() {
 
   const handleCompleteTodo = (id) => {
     setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
+      const updatedTodos = prevTodos.map((todo) => {
         if (todo.id === id) {
           return { ...todo, completed: !todo.completed };
         }
         return todo;
       });
+  
+      localStorage.setItem('todos', JSON.stringify(updatedTodos));
+  
+      return updatedTodos;
     });
   }
+  
+
+  const handleActiveTodos = () => {
+    setFiletBy('active');
+  }
+
+  const handleCompletedTodos = () => {
+    setFiletBy('completed');
+  }
+
+  const handleAllTodos = () => {
+    setFiletBy('');
+  }
+
+  const visibleTodosList = [...todos].filter(todo => {
+    switch (filterBy) {
+      case 'active':
+        return !todo.completed;
+
+      case 'completed':
+        return todo.completed;
+
+      default:
+        break;
+    }
+
+    return todo;
+  });
 
   return (
     <div className="App">
@@ -75,12 +108,15 @@ function App() {
         />
 
         <TodoList 
-          todos={todos}
+          todos={visibleTodosList}
           onRemove={handleRemoveTodo}
           onComplete={handleCompleteTodo}
         />
         <TodoFooter 
           activeTodos={countActiveTodos}
+          onActive={handleActiveTodos}
+          onCompleted={handleCompletedTodos}
+          onAll={handleAllTodos}
         />
       </div>
     </div>

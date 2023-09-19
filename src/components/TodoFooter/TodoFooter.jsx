@@ -1,7 +1,12 @@
 import React from 'react';
 import './TodoFooter.scss';
 
-const TodoFooter = ({ activeTodos}) => {
+const TodoFooter = ({ 
+  activeTodos, 
+  onActive,
+  onCompleted,
+  onAll
+}) => {
   return (
     <div className='footer'>
       <span>{`${activeTodos} active todo${activeTodos === 1 ? '' : 's'}`}</span>
@@ -10,6 +15,7 @@ const TodoFooter = ({ activeTodos}) => {
         <a
           href="#/"
           className='footer__link'
+          onClick={() => onAll()}
         >
           All
         </a>
@@ -17,7 +23,7 @@ const TodoFooter = ({ activeTodos}) => {
         <a
           href="#/"
           className='footer__link'
-
+          onClick={() => onCompleted()}
         >
           Completed
         </a>
@@ -25,6 +31,7 @@ const TodoFooter = ({ activeTodos}) => {
         <a
           href="#/"
           className='footer__link'
+          onClick={() => onActive()}
         >
           Active
         </a>
