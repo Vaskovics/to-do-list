@@ -1,0 +1,17 @@
+.completed {
+  color: red;
+  text-decoration: line-through;
+}
+
+.App {
+  margin: 20px auto;
+  width: max-content;
+}
+
+.container {
+  width: 300px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow here */
+  overflow: hidden;
+}

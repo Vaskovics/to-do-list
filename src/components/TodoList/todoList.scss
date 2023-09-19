@@ -1,0 +1,12 @@
+.todolist {
+
+  &__item {
+    list-style: none;
+  }
+
+  &__title {
+    display: inline-block;
+    cursor: pointer;
+    min-width: 30px;
+  }
+}

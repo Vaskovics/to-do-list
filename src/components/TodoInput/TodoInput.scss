@@ -1,0 +1,12 @@
+.todo-input {
+  display: flex;
+  justify-content: center;
+
+  & input {
+    width: 80%;
+  }
+
+  & button {
+    width: 20%;
+  }
+}
