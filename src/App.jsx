@@ -10,6 +10,9 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [filterBy, setFiletBy] = useState();
+  const [editTodoId, setEditTodoId] = useState(null);
+  const [editedText, setEditedText] = useState('');
+  
 
   const countActiveTodos = useMemo(() => {
     const count = todos.reduce((count, current) => {
@@ -81,6 +84,31 @@ function App() {
     setFiletBy('');
   }
 
+  const handleEditTodo = (id) => {
+    setEditTodoId(id);
+  }
+
+  const handleOnChangeEditTodo = (text) => {
+    setEditedText(text)
+  }
+
+  const handleOnSaveEditedTodo = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, title: editedText };
+      }
+      return todo;
+    });
+  
+    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+  
+    setTodos(updatedTodos);
+    setEditTodoId(null);
+    setEditedText('');
+  };
+  
+  
+
   const visibleTodosList = [...todos].filter(todo => {
     switch (filterBy) {
       case 'active':
@@ -111,6 +139,11 @@ function App() {
           todos={visibleTodosList}
           onRemove={handleRemoveTodo}
           onComplete={handleCompleteTodo}
+          onEdit={handleEditTodo}
+          editTodoId={editTodoId}
+          editedText={editedText}
+          onChangeEdit={handleOnChangeEditTodo}
+          onSaveEditedTOdo={handleOnSaveEditedTodo}
         />
         <TodoFooter 
           activeTodos={countActiveTodos}

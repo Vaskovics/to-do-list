@@ -6,39 +6,63 @@ const TodoList = ({
   todos, 
   onRemove,
   onComplete,
+  onEdit,
+  editTodoId,
+  editedText,
+  onChangeEdit,
+  onSaveEditedTOdo
 }) => {
   return (
     <div className='todolist'>
       <ul>
         {todos.map((todo) => (
-
           <li 
             key={todo.id}
-            className={classNames(
-              'todolist__item',
-              {
-              'completed': todo.completed,
-            })}
           >
-            <button
-              onClick={() =>onRemove(todo.id)}
-              className='todolist__button'
-            >
-              X
-            </button>
-            
-            <span 
-              className={classNames(
-                'todolist__title',
-                {
-                  'completed': todo.completed,
-                }
-              )}
-              onClick={() => onComplete(todo.id)}
-            >
-              {todo.title}
-            </span>
+            {editTodoId === todo.id ? (
+              <div>
+                <input
+                  type='text'
+                  value={editedText}
+                  onChange={(e) => onChangeEdit(e.target.value)}
+                />
 
+                <button onClick={() => onSaveEditedTOdo(todo.id)}>
+                  Save
+                </button>
+              </div>
+
+            ): (
+              <div>
+                <button
+                  onClick={() =>onRemove(todo.id)}
+                  className='todolist__button'
+                >
+                X
+                </button>
+              
+                <span 
+                  className={classNames(
+                    'todolist__title',
+                    {
+                      'completed': todo.completed,
+                    }
+                  )}
+                  onClick={() => onComplete(todo.id)}
+                >
+                  {todo.title}
+                </span>
+
+                <span
+                  className='todolist__edit'
+                  onClick={() => onEdit(todo.id)}
+                  title='Edit Todo'
+                >
+                  🖋️
+                </span>
+              </div>
+             
+                )}
           </li>
         ))}
       </ul>
