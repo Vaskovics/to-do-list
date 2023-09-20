@@ -17,14 +17,14 @@ const TodoList = ({
       <ul>
         {todos.map((todo) => (
           <li
-            className="todolist__item"
+          className="todolist__item"
             key={todo.id}
           >
             {editTodoId === todo.id ? (
               <div>
                 <input
                   type='text'
-                  value={editedText || todo.title}
+                  defaultValue={editedText || todo.title}
                   onChange={(e) => onChangeEdit(e.target.value)}
                 />
 

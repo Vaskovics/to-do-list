@@ -5,6 +5,11 @@ import TodoList from './components/TodoList/TodoList';
 import { getNewId } from './utils/helperFunction';
 import TodoFooter from './components/TodoFooter/TodoFooter';
 
+const saveToLocalStorage = (newTodos) => {
+  localStorage.setItem('todos', JSON.stringify(newTodos));
+
+}
+
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -12,7 +17,6 @@ function App() {
   const [filterBy, setFiletBy] = useState();
   const [editTodoId, setEditTodoId] = useState(null);
   const [editedText, setEditedText] = useState('');
-  
 
   const countActiveTodos = useMemo(() => {
     const count = todos.reduce((count, current) => {
@@ -46,7 +50,7 @@ function App() {
     }
 
     const newTodos = [...todos, tempTodo];
-    localStorage.setItem('todos', JSON.stringify(newTodos));
+    saveToLocalStorage(newTodos);
 
     setTodos(newTodos);
     setNewTitle('');
@@ -65,7 +69,7 @@ function App() {
         return todo;
       });
   
-      localStorage.setItem('todos', JSON.stringify(updatedTodos));
+      saveToLocalStorage(updatedTodos)
   
       return updatedTodos;
     });
@@ -89,6 +93,7 @@ function App() {
   }
 
   const handleOnChangeEditTodo = (text) => {
+    
     setEditedText(text)
   }
 
