@@ -5,6 +5,7 @@ const TodoInput = ({
   newTitle, 
   setNewTitle, 
   onAddTodo,
+  onEnter,
 }) => {
   return (
     <div className='todo-input'>
@@ -13,6 +14,7 @@ const TodoInput = ({
         placeholder='Please add a new todo'
         value={newTitle}
         onChange={(e) => setNewTitle(e.target.value)}
+        onKeyDown={(e) => onEnter(e)}
       />
 
       <button

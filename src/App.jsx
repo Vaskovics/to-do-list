@@ -113,6 +113,11 @@ function App() {
     setEditedText('');
   };
   
+  const handleOnEnter = (event) => {
+    if (event.key === 'Enter') {
+      handleAddTodo();
+    }
+  }
   
   
 
@@ -140,6 +145,7 @@ function App() {
           newTitle={newTitle}
           setNewTitle={setNewTitle}
           onAddTodo={handleAddTodo}
+          onEnter={handleOnEnter}
         />
 
         <TodoList 
