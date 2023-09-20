@@ -93,6 +93,12 @@ function App() {
   }
 
   const handleOnSaveEditedTodo = (id) => {
+    if (!editedText.trim()) {
+      setEditTodoId(null);
+      setEditedText('');
+      return;
+    }
+  
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
         return { ...todo, title: editedText };
@@ -106,6 +112,7 @@ function App() {
     setEditTodoId(null);
     setEditedText('');
   };
+  
   
   
 

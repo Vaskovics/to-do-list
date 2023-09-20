@@ -16,14 +16,15 @@ const TodoList = ({
     <div className='todolist'>
       <ul>
         {todos.map((todo) => (
-          <li 
+          <li
+            className="todolist__item"
             key={todo.id}
           >
             {editTodoId === todo.id ? (
               <div>
                 <input
                   type='text'
-                  value={editedText}
+                  value={editedText || todo.title}
                   onChange={(e) => onChangeEdit(e.target.value)}
                 />
 
@@ -33,7 +34,8 @@ const TodoList = ({
               </div>
 
             ): (
-              <div>
+            
+            <div>
                 <button
                   onClick={() =>onRemove(todo.id)}
                   className='todolist__button'
